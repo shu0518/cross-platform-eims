@@ -1,120 +1,68 @@
-# Cross-Platform EIMS 
+# Cross-Platform Window/Door Contractor Management System
 
-> 一個整合 AI 視覺邊緣運算與跨平台管理後台的企業資訊管理系統。
+> A window/door installation business's contractor-management system: a Vue 3 admin dashboard and a native Android client both talk to one Express/MySQL API, and the Android client also runs on-device YOLOv11-seg window detection via PyTorch Mobile.
 
-![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)
-![Last Updated](https://img.shields.io/badge/Last_Updated-2026.03.11-brightgreen)
-![Android](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white)
-![Vue](https://img.shields.io/badge/Frontend-Vue.js-4FC08D?logo=vuedotjs&logoColor=white)
+`Capstone project` · NCKU
+**Stack:** Vue 3 · Express · MySQL · Android (Java, PyTorch Mobile) · YOLOv11-seg (TorchScript/ONNX/TFLite)
 
-## Key Features
+## Overview
 
-* **跨平台客戶端部署**：原生 Android 客戶端，針對行動裝置優化。
-* **邊緣 AI 視覺辨識**：整合 PyTorch Mobile，支援設備端 YOLO 模型即時影像推理，不須依賴雲端運算即可完成辨識任務。
-* **現代化管理後台**：基於 Vue 3 與 Vuex 構建的 Web 控制中心，提供流暢的數據可視化與資訊管理。
-* **端到端流程整合**：涵蓋從模型訓練轉換（`LabelmeToYOLO`、`runPytorchMobile`）到終端部署的完整解決方案。
+The system covers a window/door contractor's daily workflow: managing customers and contractors, recording window/door measurements, generating quotations and processing/material-request documents (from the business's own Excel templates, via `pdfkit`/`exceljs`/`docx`), and emailing signup/password-reset verification codes (`nodemailer`). Both the Vue web dashboard and the Android app call the same 36-route Express API backed by MySQL. On the Android side, `WindowDetectionActivity` additionally runs a YOLOv11-seg model on-device (via PyTorch Mobile) to detect and segment windows from the camera feed, so window measurement can be assisted by live object detection instead of manual entry only. `vision_model/` holds the training-side scripts (Labelme-to-YOLO conversion, a format-agnostic inference wrapper for PyTorch/ONNX/TensorFlow/TFLite) used to produce that model.
 
-## Tech Stack
+## Model Weights & Training Data (not included in this repo)
 
-**Client App (Android)**
-* Java / Kotlin
-* PyTorch Android (`1.13.1`)
+`vision_model/` only keeps the scripts, not their outputs. Not included:
 
-**Admin Dashboard (Web)**
-* Vue 3
-* Vuex 4 / Vue Router
-* Axios
+- Model weights: `model_1119.torchscript.pt`, `model_v11.pt`, `best_float32.tflite`
+- Training data: the YOLO-format dataset (`yolo_dataset/`, train/val/test splits), 215 raw labeled images, 150 inference-output images
 
-**Vision Model (AI)**
-* PyTorch / TorchScript
-* YOLO
+Together these were 300+ MB and are exactly what `vision_model/`'s scripts (`LabelmeToYOLO.py`, `runPytorchMobile.py`, `runpt.py`) exist to regenerate — they're reproducible from a Labelme-annotated image set, not one-off assets, so keeping them out of git was a deliberate size/reproducibility trade-off rather than an oversight. To run detection locally: label your own images with Labelme, run `LabelmeToYOLO.py` to convert to YOLO format, train a YOLOv11-seg model, export to TorchScript, and place the export at `android_client_app/app/src/main/assets/model_1119.torchscript.pt` (see [`android_client_app/README.md`](android_client_app/README.md)). Without the model file, every screen except `WindowDetectionActivity`/`TestCameraActivity` works normally.
 
-## Quick Start
+## Key Design Decisions
 
-### 1. Web Admin Dashboard (後台管理系統)
+| Decision | Rationale |
+| --- | --- |
+| Documents generated from the business's real Excel templates (`db/src/template/*.xlsx`) via `pdfkit`/`exceljs`/`docx`, not hand-rolled layout code | Output matches the paperwork the business already uses (quotation/processing/material-request forms) instead of reinventing the format |
+| Vision inference wrapped behind a single class (`runpt.py: YOLOSegInference`) that dispatches on `model_format` (pytorch/onnx/tensorflow/tflite) | One inference call site regardless of which export format is deployed, so swapping the Android TFLite model for a server-side PyTorch model doesn't change calling code |
+| Android build restricted to `arm64-v8a` only (`ndk { abiFilters 'arm64-v8a' }`) | PyTorch Mobile's native libraries are large per-ABI; a single-ABI build keeps the APK size down at the cost of not running on x86/other-ABI devices |
+| Both Vue dashboard and Android app call the same Express API rather than each having their own backend | One MySQL-backed source of truth for customers/contractors/measurements/orders across both clients |
+
+## Limitations
+
+- `npm start` in `web_admin_dashboard/db` is broken: `package.json`'s `start` script runs `node server.js`, but that file doesn't exist — the actual entry point with `app.listen()` is `app.js`.
+- `app.js` calls `require("body-parser")`, but `body-parser` is not listed in `package.json`'s dependencies — a clean `npm install` will not install it, and the server will fail to start until it's added manually.
+- `jsonwebtoken` is a listed backend dependency but is never imported anywhere in `db/src` — despite being present in `package.json`, authentication is not actually implemented as token-based auth in the current routes/controller.
+- The backend API base URL (`http://163.17.135.120`) is hardcoded directly inside 17 separate Android `Activity` files rather than centralized in one config/constants file, so pointing the app at a different server means editing all 17.
+- Android build only targets `arm64-v8a` (see Key Design Decisions) — it will not install on an x86/x86_64 emulator or a device with a different ABI.
+- No automated tests: the backend's `package.json` test script is a stub (`echo "Error: no test specified" && exit 1`), and there's no test setup in the Vue dashboard or the Android app.
+
+## Running It
 
 ```bash
-# 進入目錄
-cd Cross_Platform_EIMS/web_admin_dashboard
-
-# 安裝依賴套件
+# Web admin dashboard (Vue 3)
+cd web_admin_dashboard
 npm install
-
-# 啟動開發伺服器 (包含熱重載)
 npm run serve
 
-# 生產環境編譯打包
-npm run build
-```
-
-### 2. Android Client App (行動端)
-
-1. 使用 Android Studio 開啟 `android_client_app` 目錄。
-2. 同步 Gradle (`Sync Project with Gradle Files`)。
-3. 模型權重未包含在此 repo，需自行放置，詳見 [`android_client_app/README.md`](android_client_app/README.md)。
-4. 點擊 **Run** 部署至 Android 實體機或模擬器。
-
-### 3. Web Admin Dashboard 的後端 DB 設定
-
-`web_admin_dashboard/db/` 是 Express 後端，需要資料庫連線資訊：
-
-```bash
+# Backend API (Express + MySQL)
 cd web_admin_dashboard/db
-cp .env.example .env
-# 填入 DB_HOST / DB_USER / DB_PASSWORD / EMAIL_USER / EMAIL_PASSWORD 等實際值
+npm install
+npm install body-parser        # required by app.js but missing from package.json
+cp .env.example .env           # fill in DB_HOST / DB_USER / DB_PASSWORD / EMAIL_USER / EMAIL_PASSWORD
+node app.js                    # `npm start` is broken, see Limitations — run app.js directly
 ```
-
-> 這份原本的 `.env`（含真實資料庫密碼與 Gmail 應用程式密碼）曾經不小心被 commit 進舊版 repo，已從這裡移除。**該組密碼建議盡快更換/撤銷**（跟這次重建 repo 無關，是獨立要處理的事）。
-
-## Project Structure
 
 ```text
-cross-platform-eims/
-├── android_client_app/    # Android 客戶端 (整合 PyTorch Mobile)
-│   ├── app/               # 應用程式主程式碼與 UI 邏輯
-│   ├── README.md          # 模型權重放置說明
-│   └── build.gradle       # Gradle 構建配置
-├── vision_model/          # 電腦視覺模型訓練/轉換腳本（不含權重與訓練圖片，見下）
-│   ├── LabelmeToYOLO.py   # 資料集格式轉換工具
-│   ├── runPytorchMobile.py# 模型轉換為 TorchScript 格式的腳本
-│   └── distribute.py, runpt.py, testGPU.py
-├── web_admin_dashboard/   # Web 企業管理後台
-│   ├── src/               # Vue 元件、Vuex 狀態管理與路由
-│   ├── db/                # Express 後端（含 .env.example）
-│   ├── package.json       # 專案相依套件 (Vue 3, Axios)
-│   └── vue.config.js      # Vue CLI 設置
-└── demo_assets/           # 展示截圖 + app_demo.gif（原始 mp4 未包含）
+# Android client
+1. Open android_client_app/ in Android Studio, sync Gradle.
+2. Place a trained model at app/src/main/assets/model_1119.torchscript.pt (optional, see above).
+3. Run on an arm64-v8a device or emulator.
 ```
 
-## 模型權重與訓練資料（未包含在此 repo）
+## Structure
 
-`vision_model/` 只保留訓練/轉換用的腳本，以下內容**不包含在版本控制中**（本地開發時自行準備）：
-
-* 模型權重：`model_1119.torchscript.pt`、`model_v11.pt`、`best_float32.tflite`
-* 訓練資料：`yolo_dataset/`（YOLO 格式訓練集）、`images/`（215 張原始標註圖片）、`output/`（150 張推論輸出圖）
-* Android 端同款的 `model_1119.torchscript.pt`（原本在 `android_client_app` 的 assets 裡也放了一份重複的）
-
-原因：這些檔案合計超過 300MB，且不需要進版控就能重現——`vision_model/` 裡的腳本本身就是用來重新產生它們的工具鏈。如果需要這些檔案，請聯絡我另外取得。
-
-## Environment Variables
-
-若要在本地環境正確運行 Web 管理後台，請在 `web_admin_dashboard` 根目錄下建立 `.env` 檔案，並配置以下變數（範例）：
-
-```env
-# API 伺服器基礎路徑
-VUE_APP_BASE_API=http://localhost:8080/api/v1
-
-# 其他環境配置
-NODE_ENV=development
-```
-*(註：目前系統未直接包含 `.env` 文件，建議依據實際 API 部署端點自行配置。)*
-
-## 🔌 API Reference (預期接口)
-
-| Method | Endpoint              | Description                    | Auth Required |
-| :---   | :---                  | :---                           | :---          |
-| `POST` | `/api/v1/auth/login`  | 管理員登入並取得 Token         | No            |
-| `GET`  | `/api/v1/dashboard`   | 獲取系統概覽與辨識統計數據     | Yes           |
-| `POST` | `/api/v1/records`     | 接收來自 Android 端的辨識結果  | Yes           |
-| `GET`  | `/api/v1/records`     | 查詢歷史辨識與管理紀錄         | Yes           |
-
+    android_client_app/       Java + PyTorch Mobile client: customers, contractors, quotations, on-device detection
+    vision_model/              YOLOv11-seg training/export scripts (weights and datasets not included, see above)
+    web_admin_dashboard/       Vue 3 admin frontend
+    web_admin_dashboard/db/    Express + MySQL backend API (36 routes: user/contract/client/measure/machine/download)
+    demo_assets/               Screenshots + app_demo.gif
