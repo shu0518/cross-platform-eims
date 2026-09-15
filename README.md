@@ -7,7 +7,7 @@
 
 ## Overview
 
-The system covers a window/door contractor's daily workflow: managing customers and contractors, recording window/door measurements, generating quotations and processing/material-request documents (from the business's own Excel templates, via `pdfkit`/`exceljs`/`docx`), and emailing signup/password-reset verification codes (`nodemailer`). Both the Vue web dashboard and the Android app call the same 36-route Express API backed by MySQL. On the Android side, `WindowDetectionActivity` additionally runs a YOLOv11-seg model on-device (via PyTorch Mobile) to detect and segment windows from the camera feed, so window measurement can be assisted by live object detection instead of manual entry only. `vision_model/` holds the training-side scripts (Labelme-to-YOLO conversion, a format-agnostic inference wrapper for PyTorch/ONNX/TensorFlow/TFLite) used to produce that model.
+The system covers a window/door contractor's daily workflow: managing customers and contractors, recording window/door measurements, generating quotations and processing/material-request documents (from the business's own Excel templates, via `exceljs`/`docx`), and emailing signup/password-reset verification codes (`nodemailer`). Both the Vue web dashboard and the Android app call the same 36-route Express API backed by MySQL. On the Android side, `WindowDetectionActivity` additionally runs a YOLOv11-seg model on-device (via PyTorch Mobile) to detect and segment windows from the camera feed, so window measurement can be assisted by live object detection instead of manual entry only. `vision_model/` holds the training-side scripts (Labelme-to-YOLO conversion, a format-agnostic inference wrapper for PyTorch/ONNX/TensorFlow/TFLite) used to produce that model.
 
 ## Model Weights & Training Data (not included in this repo)
 
@@ -22,7 +22,7 @@ Together these were 300+ MB and are exactly what `vision_model/`'s scripts (`Lab
 
 | Decision | Rationale |
 | --- | --- |
-| Documents generated from the business's real Excel templates (`db/src/template/*.xlsx`) via `pdfkit`/`exceljs`/`docx`, not hand-rolled layout code | Output matches the paperwork the business already uses (quotation/processing/material-request forms) instead of reinventing the format |
+| Documents generated from the business's real Excel templates (`db/src/template/*.xlsx`) via `exceljs`/`docx`, not hand-rolled layout code | Output matches the paperwork the business already uses (quotation/processing/material-request forms) instead of reinventing the format |
 | Vision inference wrapped behind a single class (`runpt.py: YOLOSegInference`) that dispatches on `model_format` (pytorch/onnx/tensorflow/tflite) | One inference call site regardless of which export format is deployed, so swapping the Android TFLite model for a server-side PyTorch model doesn't change calling code |
 | Android build restricted to `arm64-v8a` only (`ndk { abiFilters 'arm64-v8a' }`) | PyTorch Mobile's native libraries are large per-ABI; a single-ABI build keeps the APK size down at the cost of not running on x86/other-ABI devices |
 | Both Vue dashboard and Android app call the same Express API rather than each having their own backend | One MySQL-backed source of truth for customers/contractors/measurements/orders across both clients |
