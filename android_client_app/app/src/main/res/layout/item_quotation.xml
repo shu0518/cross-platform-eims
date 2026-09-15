@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- 施工項目 -->
+    <TextView
+        android:id="@+id/projectNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:text="施工項目"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <!-- 尺寸 -->
+    <TextView
+        android:id="@+id/sizeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:text="尺寸"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <!-- 數量 -->
+    <TextView
+        android:id="@+id/quantityTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text="數量"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <!-- 單價 -->
+    <TextView
+        android:id="@+id/unitPriceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="單價"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <!-- 總金額 -->
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="總金額"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+</LinearLayout>

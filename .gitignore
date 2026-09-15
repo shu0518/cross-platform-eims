@@ -1,0 +1,39 @@
+# Model weights
+*.pt
+*.pth
+*.tflite
+*.onnx
+
+# Training data / large image dumps
+yolo_dataset/
+vision_model/images/
+vision_model/output/
+
+# Android build products
+*.apk
+*.aab
+*.dex
+android_client_app/**/build/
+android_client_app/**/.gradle/
+android_client_app/**/.idea/
+android_client_app/local.properties
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# .NET / general build
+bin/
+obj/
+.vs/
+
+# Secrets
+.env
+.env.*
+!.env.example

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 選中狀態的背景 -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#D6D6D6" /> <!-- 當按下時顯示的背景色 -->
+            <corners android:radius="8dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#BBBBBB" /> <!-- 邊框顏色 -->
+        </shape>
+    </item>
+
+    <!-- 正常狀態的背景 -->
+    <item>
+        <shape>
+            <solid android:color="#ECECEC" /> <!-- 默認背景色 -->
+            <corners android:radius="8dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#CCCCCC" /> <!-- 邊框顏色 -->
+        </shape>
+    </item>
+
+</selector>

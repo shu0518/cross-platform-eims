@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".AddWindowFrameActivity">
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9BAAB1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back"
+            android:tint="#FFFFFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="-48dp"
+            android:text="新增窗框數據"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/formLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <!-- 窗框數據輸入欄位 -->
+        <EditText
+            android:id="@+id/numberEditText"
+            style="@style/CustomEditTextStyle"
+            android:hint="編號" />
+
+        <EditText
+            android:id="@+id/floorEditText"
+            style="@style/CustomEditTextStyle"
+            android:hint="格局位置" />
+
+        <EditText
+            android:id="@+id/layoutEditText"
+            style="@style/CustomEditTextStyle"
+            android:hint="長度" />
+
+        <EditText
+            android:id="@+id/lengthEditText"
+            style="@style/CustomEditTextStyle"
+            android:hint="寬度" />
+
+        <EditText
+            android:id="@+id/widthEditText"
+            style="@style/CustomEditTextStyle"
+            android:hint="數量" />
+
+        <!-- 規格下拉式選單 -->
+        <Spinner
+            android:id="@+id/specSpinner"
+            style="@style/CustomSpinnerStyle"
+            android:spinnerMode="dropdown"
+            android:dropDownVerticalOffset="8dp" />
+        <!-- 玻璃型號下拉式選單 -->
+        <Spinner
+            android:id="@+id/glassTypeSpinner"
+            style="@style/CustomSpinnerStyle"
+            android:spinnerMode="dropdown"
+            android:dropDownVerticalOffset="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#a78989"
+        android:text="取消"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/formLayout" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#a78989"
+        android:text="新增"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/formLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

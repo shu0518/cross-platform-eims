@@ -1,0 +1,49 @@
+資料夾說明:
+    node_mudules: node套件
+    public: 對外公開的檔案、靜態、不被壓縮
+    src: 主要開發區
+        assets: 靜態、圖片/CSS
+        components: 各元件
+        router: 路徑定義
+        store: Vuex狀態管理
+        views: URL顯示的頁面
+    App.vue: 專案主元件
+    main.js: Vue載入核心，有些套件要在這裡引入才能使用
+    package.json: 所有npm套件
+
+匯出/入資料庫：https://mnya.tw/cc/word/1395.html
+
+步驟：
+    建置頁面：
+        views資料夾下新增.vue檔
+        打"vue"，選擇 <vue> with default.vue
+        style加scoped
+    
+    設定Router
+        打開router/index.js
+        在上⽅引入，然後在routes直接使⽤
+            import Home from '../views/Home.vue'
+            const routes = [
+                {
+                path: '/',
+                name: 'Home',
+                component: Home
+                }
+            ]
+        path：在網址上的路徑，像/About就會變成  http://localhost:8080/About
+        name：為 path 做命名
+        component：對應的檔案
+
+template 就是 HTML、這邊要注意 template 只能有⼀個div包住
+
+執行網頁：
+    要先cd tiaotiaokuangkuang 在下npm
+    ex:
+        cd .\tiaotiaokuangkuang\
+        npm run serve
+
+執行後端：
+    要先cd db 在下nodemon
+    ex:
+        cd .\db\
+        nodemon app.js

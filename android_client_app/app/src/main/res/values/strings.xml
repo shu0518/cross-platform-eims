@@ -1,0 +1,282 @@
+<resources>
+    <string name="app_name">ttkk</string>
+    <string name="postCustomer">新增客戶</string>
+    <string name="address">地址</string>
+
+    <!-- 顏色選項 -->
+    <string-array name="colors">
+        <item>顏色選擇</item> <!-- 預設提示 -->
+        <item>咖啡色</item>
+        <item>牙白色</item>
+        <item>純白色</item>
+        <item>香檳色</item>
+        <item>鐵灰色</item>
+        <item>黑色霧面</item>
+    </string-array>
+
+    <!-- 規格選項 -->
+    <string-array name="spec_options">
+        <item>門窗選擇</item> <!-- 預設提示 -->
+        <item>門</item>
+        <item>窗</item>
+    </string-array>
+
+    <!-- 窗的種類選項 -->
+    <string-array name="window_types">
+        <item>請選擇窗戶種類</item>
+        <item>2拉</item>
+        <item>3拉</item>
+        <item>4拉</item>
+    </string-array>
+
+    <!-- 門的廠商要求選項（複選）-->
+    <string-array name="門的廠商要求">
+        <item>包料</item>
+        <item>折舊框不清運</item>
+        <item>要清運</item>
+        <item>現場組裝</item>
+        <item>內看內開</item>
+        <item>框加門-只做門-包裝</item>
+        <item>外看外開</item>
+    </string-array>
+
+    <!-- 窗的廠商要求選項（複選）-->
+    <string-array name="窗的廠商要求">
+        <item>包料</item>
+        <item>折舊框不清運</item>
+        <item>要清運</item>
+        <item>現場組裝</item>
+        <item>做交</item>
+        <item>包裝</item>
+        <item>鎖鐵片</item>
+    </string-array>
+
+    <!-- 牆體（複選）-->
+    <string-array name="牆體">
+        <item>白鐵</item>
+        <item>鋼構場</item>
+        <item>磚牆</item>
+        <item>混凝土</item>
+        <item>木造</item>
+    </string-array>
+
+    <!-- 2拉 窗的規格 -->
+    <string-array name="window_2_track">
+        <item>請選擇</item>
+        <item>866</item>
+        <item>866水泥窗</item>
+        <item>1066</item>
+        <item>1068</item>
+        <item>1066-866流理台反裝</item>
+        <item>1066加1200型鎖</item>
+    </string-array>
+
+    <!-- 3拉 窗的規格 -->
+    <string-array name="window_3_track">
+        <item>請選擇</item>
+        <item>866</item>
+        <item>1066</item>
+        <item>1068</item>
+    </string-array>
+
+    <!-- 4拉 窗的規格 -->
+    <string-array name="window_4_track">
+        <item>請選擇</item>
+        <item>866</item>
+        <item>1066</item>
+        <item>1068</item>
+    </string-array>
+
+    <!-- 玻璃類別選項 -->
+    <string-array name="glass_categories">
+        <item>請選擇玻璃規格</item>
+        <item>5mm玻璃</item>
+        <item>8mm玻璃</item>
+        <item>複合玻璃</item>
+    </string-array>
+
+    <!-- 5mm 玻璃規格 -->
+    <string-array name="glass_5mm">
+        <item>請選擇5mm 玻璃種類</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>方格</item>
+        <item>壓克力 5mm</item>
+    </string-array>
+
+    <!-- 複合玻璃規格 -->
+    <string-array name="glass_複合玻璃">
+        <item>請選擇 複合玻璃種類</item>
+        <item>膠合5光+5光T</item>
+        <item>膠合5光+反射綠T</item>
+        <item>膠合5光+茶玻T</item>
+        <item>膠合5光+黑玻T</item>
+        <item>膠合5光+噴砂T</item>
+        <item>5光+綠玻T</item>
+        <item>5光+灰玻T</item>
+    </string-array>
+
+    <!-- 8mm 玻璃規格 -->
+    <string-array name="glass_8mm">
+        <item>請選擇 8mm 玻璃種類</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>壓克力 8mm</item>
+    </string-array>
+
+    <!-- 門的配件選項（複選） -->
+    <string-array name="door_accessories">
+        <item>有鎖</item>
+        <item>無鎖</item>
+        <item>喇叭鎖(60)</item>
+        <item>喇叭鎖(85加蓋)</item>
+        <item>127長</item>
+        <item>白鐵門栓</item>
+        <item>門弓器</item>
+        <item>門縫條</item>
+        <item>門檔</item>
+        <item>N字型</item>
+        <item>哈樂</item>
+        <item>毛刷蓋</item>
+    </string-array>
+
+    <!-- 現場補料選項 -->
+    <string-array name="replenish_options">
+        <item>請選擇補料</item>
+        <item>料號6214 - 2.5×3.8角鐵</item>
+        <item>料號6205 - 3×6角鐵</item>
+        <item>料號6202 - 2×2角鐵</item>
+        <item>料號4107A花板</item>
+    </string-array>
+
+    <!-- 門型 -->
+    <string-array name="door_types">
+        <item>請選擇門型</item>
+        <item>L型兩孔門框</item>
+        <item>7公分</item>
+        <item>3×10框偏領</item>
+        <item>3×10框中領</item>
+        <item>4.5×10框中領</item>
+    </string-array>
+
+    <!-- 門片 -->
+    <string-array name="door_piece_700">
+        <item>700型</item>
+    </string-array>
+
+    <string-array name="door_piece_700_extended">
+        <item>700型</item>
+        <item>700型(700加大)</item>
+    </string-array>
+
+    <string-array name="door_piece_1000">
+        <item>1000型</item>
+    </string-array>
+
+    <!-- 門的樣式選項 -->
+    <string-array name="door_style_options">
+        <item>請選擇樣式</item>
+        <item>上下</item>
+        <item>上中下</item>
+    </string-array>
+
+    <!-- 上欄位選項 -->
+    <string-array name="top_position_options">
+        <item>請選擇上樣式</item>
+        <item>混色花板</item>
+        <item>全門花</item>
+        <item>全百葉片</item>
+        <item>8mm玻璃</item>
+        <item>5mm玻璃</item>
+        <item>花板</item>
+        <item>門花</item>
+        <item>上百葉</item>
+        <item>花格網</item>
+    </string-array>
+
+    <!-- 中欄位選項 (固定為花格網) -->
+    <string-array name="middle_position_options">
+        <item>花格網</item>
+    </string-array>
+
+    <!-- 下欄位選項 -->
+    <string-array name="bottom_position_options">
+        <item>請選擇下樣式</item>
+        <item>混色花板</item>
+        <item>全門花</item>
+        <item>全百葉片</item>
+        <item>8mm玻璃</item>
+        <item>5mm玻璃</item>
+        <item>花板</item>
+        <item>下百葉</item>
+    </string-array>
+
+    <!-- 上欄位玻璃 5mm 規格 -->
+    <string-array name="door_top_glass_5mm">
+        <item>請選擇上欄位玻璃</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>方格</item>
+        <item>壓克力 5mm</item>
+    </string-array>
+
+    <!-- 上欄位玻璃 8mm 規格 -->
+    <string-array name="door_top_glass_8mm">
+        <item>請選擇上欄位玻璃</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>壓克力 8mm</item>
+    </string-array>
+    <!-- 下欄位玻璃 5mm 規格 -->
+    <string-array name="door_bottom_glass_5mm">
+        <item>請選擇下欄位玻璃</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>方格</item>
+        <item>壓克力 5mm</item>
+    </string-array>
+
+    <!-- 下欄位玻璃 8mm 規格 -->
+    <string-array name="door_bottom_glass_8mm">
+        <item>請選擇下欄位玻璃</item>
+        <item>銀霞</item>
+        <item>反射綠</item>
+        <item>5光</item>
+        <item>噴砂不沾手</item>
+        <item>綠玻</item>
+        <item>茶玻</item>
+        <item>黑玻</item>
+        <item>灰玻</item>
+        <item>壓克力 8mm</item>
+    </string-array>
+</resources>

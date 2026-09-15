@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        tools:context=".AddMeasuredDataActivity">
+
+        <!-- Header Layout -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9BAAB1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back"
+                android:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="新增測量數據"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Form Layout -->
+        <LinearLayout
+            android:id="@+id/formLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+            <!-- 基本欄位 -->
+            <EditText
+                android:id="@+id/location"
+                style="@style/CustomEditTextStyle"
+                android:hint="格局"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/measured_length"
+                style="@style/CustomEditTextStyle"
+                android:hint="測量長度"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/measured_width"
+                style="@style/CustomEditTextStyle"
+                android:hint="測量寬度"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/quantity"
+                style="@style/CustomEditTextStyle"
+                android:hint="數量"
+                android:inputType="text"/>
+
+            <Spinner
+                android:id="@+id/colorSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/spec_options"
+                android:spinnerMode="dropdown" />
+
+            <!-- 牆體 -->
+            <LinearLayout
+                android:id="@+id/wallLayout"
+                style="@style/CustomSpinnerStyle"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <TextView
+                    android:id="@+id/wallTextView"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:text="選擇牆體"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/selectWallImage"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <!-- 規格選擇 -->
+            <Spinner
+                android:id="@+id/specification"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/spec_options"
+                android:spinnerMode="dropdown" />
+
+            <!-- 窗的廠商要求 -->
+            <LinearLayout
+                android:id="@+id/windowRequirementsLayout"
+                style="@style/CustomSpinnerStyle"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/windowRequirementsTextView"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:text="選擇廠商要求"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/WindowRequirementsImage"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <!-- 窗的種類選擇，初始隱藏 -->
+            <Spinner
+                android:id="@+id/windowTypeSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/window_types"
+                android:visibility="gone" />
+
+            <Spinner
+                android:id="@+id/windowDetailSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:visibility="gone" />
+
+            <!-- 窗戶玻璃規格選擇 -->
+            <Spinner
+                android:id="@+id/glassCategorySpinner"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/glass_categories"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 窗戶玻璃詳細規格 -->
+            <Spinner
+                android:id="@+id/glassDetailSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 門的廠商要求 -->
+            <LinearLayout
+                android:id="@+id/doorRequirementsLayout"
+                style="@style/CustomSpinnerStyle"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/doorRequirementsTextView"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:text="選擇廠商要求"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/DoorRequirementsImage"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <!-- 門配件區塊 -->
+            <LinearLayout
+                android:id="@+id/doorAccessoriesLayout"
+                style="@style/CustomSpinnerStyle"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/doorAccessoriesTextView"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:text="選擇門配件"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/selectAccessoriesImage"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <!-- 現場補料 -->
+            <Spinner
+                android:id="@+id/replenishSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 門型選擇 -->
+            <Spinner
+                android:id="@+id/doorTypeSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/door_types"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 門片選擇 -->
+            <Spinner
+                android:id="@+id/doorPieceSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 門樣式選擇 -->
+            <Spinner
+                android:id="@+id/doorStyleSpinner"
+                style="@style/CustomSpinnerStyle"
+                android:entries="@array/door_style_options"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <!-- 門樣式欄位 -->
+            <LinearLayout
+                android:id="@+id/positionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- 上 -->
+                <Spinner
+                    android:id="@+id/topPositionSpinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:entries="@array/top_position_options"
+                    android:spinnerMode="dropdown"/>
+
+                <!-- 上欄位玻璃規格選項 -->
+                <Spinner
+                    android:id="@+id/topGlassSpinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:layout_height="50dp"
+                    android:spinnerMode="dropdown" />
+
+                <!-- 中 (只有選上中下時才顯示) -->
+                <Spinner
+                    android:id="@+id/middlePositionSpinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:entries="@array/middle_position_options"
+                    android:spinnerMode="dropdown"
+                    android:visibility="gone" />
+
+                <!-- 下 -->
+                <Spinner
+                    android:id="@+id/bottomPositionSpinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:entries="@array/bottom_position_options"
+                    android:spinnerMode="dropdown" />
+
+                <!-- 下欄位玻璃規格選項 -->
+                <Spinner
+                    android:id="@+id/bottomGlassSpinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:layout_height="50dp"
+                    android:spinnerMode="dropdown"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_margin="30dp"
+            android:text="新增"
+            android:textSize="18sp"
+            android:backgroundTint="#a78989"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/formLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

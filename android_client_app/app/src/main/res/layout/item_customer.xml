@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- 頭像 -->
+    <ImageView
+        android:id="@+id/customerImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_profile_placeholder"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Customer image" />
+
+    <!-- 客戶名字、地址和電話號碼 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- 名字 -->
+        <TextView
+            android:id="@+id/customerNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客戶名字"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <!-- 電話號碼 -->
+        <TextView
+            android:id="@+id/customerPhoneTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="電話號碼"
+            android:textSize="16sp"
+            android:textColor="#666666" />
+        <!-- 地址 -->
+        <TextView
+            android:id="@+id/customerAddressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客戶地址"
+            android:textSize="16sp"
+            android:textColor="#666666" />
+    </LinearLayout>
+</LinearLayout>

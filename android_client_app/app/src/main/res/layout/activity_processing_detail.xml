@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".ProcessingDetailActivity">
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9BAAB1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back"
+            android:tint="#FFFFFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="-48dp"
+            android:text="加工數據"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <!-- 加工數據表格 -->
+    <LinearLayout
+        android:id="@+id/formLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <!-- 顯示加工數據的各個數據欄位 -->
+        <EditText
+            android:id="@+id/windowFrameWidth"
+            style="@style/CustomEditTextStyle"
+            android:hint="窗扇橫料"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/screenWidth"
+            style="@style/CustomEditTextStyle"
+            android:hint="紗窗橫料"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/glassWidth"
+            style="@style/CustomEditTextStyle"
+            android:hint="玻璃寬度"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/glassHeight"
+            style="@style/CustomEditTextStyle"
+            android:hint="玻璃高度"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/innerBracket"
+            style="@style/CustomEditTextStyle"
+            android:hint="內片站支"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/outerBracket"
+            style="@style/CustomEditTextStyle"
+            android:hint="外片站支"
+            android:inputType="none"
+            android:text="67.4cm" />
+
+        <EditText
+            android:id="@+id/screenBracket"
+            style="@style/CustomEditTextStyle"
+            android:hint="紗窗站支"
+            android:inputType="none"
+            android:text="67.4cm" />
+    </LinearLayout>
+
+    <!-- 翻頁按鈕 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/previousButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_previous"
+            android:contentDescription="Previous" />
+
+        <TextView
+            android:id="@+id/pageNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第3筆"
+            android:textSize="18sp"
+            android:layout_marginHorizontal="16dp" />
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_next"
+            android:contentDescription="Next" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

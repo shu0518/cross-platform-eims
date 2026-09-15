@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 用於顯示原始圖片 -->
+    <ImageView
+        android:id="@+id/originalImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Original Image"
+        android:background="#E0E0E0"/>
+
+    <!-- 用於顯示辨識結果帶有遮罩的圖片 -->
+    <ImageView
+        android:id="@+id/segmentedImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Segmented Image"
+        android:background="#E0E0E0"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 用於顯示辨識狀態或結果 -->
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="辨識結果將顯示在此"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
