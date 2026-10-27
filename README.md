@@ -2,7 +2,7 @@
 
 > A window/door installation business's contractor-management system: a Vue 3 admin dashboard and a native Android client both talk to one Express/MySQL API, and the Android client also runs on-device YOLOv11-seg window detection via PyTorch Mobile.
 
-`Capstone project` · NCKU
+`Capstone project` · NUTC
 **Stack:** Vue 3 · Express · MySQL · Android (Java, PyTorch Mobile) · YOLOv11-seg (TorchScript/ONNX/TFLite)
 
 ## Overview
